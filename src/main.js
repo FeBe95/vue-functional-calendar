@@ -1,14 +1,24 @@
-import Vue from 'vue'
+import { createApp } from 'vue'
 import FunctionalCalendar from '../index'
-import Demo from './Demo'
-Vue.use(FunctionalCalendar, {
+
+import 'highlight.js/styles/default.css'
+import hljs from 'highlight.js/lib/core';
+import xml from 'highlight.js/lib/languages/xml';
+import hljsVuePlugin from "@highlightjs/vue-plugin";
+
+import Demo from './Demo.vue'
+
+const app = createApp({
+  template: '<Demo/>',
+  components: { Demo }
+});
+
+app.use(FunctionalCalendar, {
   showWeekNumbers: false,
   dayNames: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su']
 })
-Vue.config.productionTip = false
 
-new Vue({
-  el: '#app',
-  template: '<Demo/>',
-  components: { Demo }
-})
+hljs.registerLanguage('html', xml);
+app.component('highlight-code', hljsVuePlugin.component);
+
+app.mount('#app');

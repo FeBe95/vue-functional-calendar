@@ -4,6 +4,8 @@
       :fConfigs="fConfigs"
       :singleSelectedDate="singleSelectedDate"
       :calendar="calendar"
+      @update:singleSelectedDate="updateSingleSelectedDate"
+      @update:calendar="updateCalendarVal"
     >
       <template v-slot:dateRangeInputs="props">
         <slot
@@ -47,7 +49,7 @@
 
       <template v-else>
         <div class="vfc-calendars-container">
-          <Arrows
+          <CalendarArrows
             :isMultiple="false"
             :fConfigs="fConfigs"
             :allowPreDate="allowPreDate"
@@ -59,7 +61,7 @@
             <template v-slot:navigationArrowRight>
               <slot name="navigationArrowRight"></slot>
             </template>
-          </Arrows>
+          </CalendarArrows>
 
           <div class="vfc-calendars" ref="calendars">
             <div
@@ -78,7 +80,7 @@
               >
               </month-year-picker>
               <div class="vfc-content">
-                <Arrows
+                <CalendarArrows
                   :isMultiple="true"
                   :fConfigs="fConfigs"
                   :allowPreDate="allowPreDate"
@@ -91,7 +93,7 @@
                   <template v-slot:navigationArrowRight>
                     <slot name="navigationArrowRight"></slot>
                   </template>
-                </Arrows>
+                </CalendarArrows>
 
                 <transition tag="div" :name="getTransition_()" appear>
                   <div
@@ -152,7 +154,7 @@
                       :number="week.number"
                       :borderColor="borderColor"
                     />
-                    <Day
+                    <CalendarDay
                       v-for="(day, day_key) in week.days"
                       ref="day"
                       :key="key + week_key + day_key + 1"
@@ -160,6 +162,7 @@
                       :day="day"
                       :fConfigs="fConfigs"
                       :calendar="calendar"
+                      @clearRange="clearRange"
                       :helpCalendar="helpCalendar"
                       :week="week"
                       :day_key="day_key"
@@ -169,7 +172,7 @@
                       <template v-slot:default="props">
                         <slot :week="props.week" :day="props.day"></slot>
                       </template>
-                    </Day>
+                    </CalendarDay>
                   </div>
                   <template
                     v-if="
@@ -190,7 +193,7 @@
               </div>
             </div>
           </div>
-          <Footer v-if="canClearRange || $slots['footer']">
+          <CalendarFooter v-if="canClearRange || $slots['footer']">
             <template v-slot:footer>
               <div @click="cleanRange">
                 <slot name="cleaner">
@@ -209,7 +212,7 @@
               <slot name="footer"></slot>
             </template>
             <!-- <span>&nbsp;</span> -->
-          </Footer>
+          </CalendarFooter>
         </div>
       </template>
     </div>
@@ -220,12 +223,12 @@
 import helpCalendarClass from '../assets/js/helpCalendar'
 import { propsAndData } from '../mixins/propsAndData'
 import TimePicker from '../components/TimePicker.vue'
-import Arrows from '../components/Arrows.vue'
+import CalendarArrows from './CalendarArrows.vue'
 import WeekNumbers from '../components/WeekNumbers.vue'
-import Day from '../components/Day.vue'
+import CalendarDay from './CalendarDay.vue'
 import MonthYearPicker from '../components/MonthYearPicker.vue'
 import PickerInputs from '../components/PickerInputs.vue'
-import Footer from '../components/Footer.vue'
+import CalendarFooter from './CalendarFooter.vue'
 
 import { hElContains, hUniqueID } from '../utils/helpers'
 // import calendarMethods from '../utils/calendarMethods'
@@ -236,9 +239,9 @@ export default {
     MonthYearPicker,
     TimePicker,
     PickerInputs,
-    Arrows,
-    Footer,
-    Day,
+    CalendarArrows,
+    CalendarFooter,
+    CalendarDay,
     WeekNumbers
   },
   mixins: [propsAndData],
@@ -342,13 +345,13 @@ export default {
       function(value) {
         if (
           typeof value === 'object' &&
-          (value.hasOwnProperty('dateRange') ||
-            value.hasOwnProperty('selectedDate'))
+          (Object.prototype.hasOwnProperty.call(value, 'dateRange') ||
+            Object.prototype.hasOwnProperty.call(value, 'selectedDate'))
         ) {
           this.calendar = value
         } else if (
           typeof value === 'object' &&
-          value.hasOwnProperty('multipleDateRange')
+          Object.prototype.hasOwnProperty.call(value, 'multipleDateRange')
         ) {
           this.calendar.multipleDateRange = value.multipleDateRange
           const lastElement = this.calendar.multipleDateRange[
@@ -375,7 +378,7 @@ export default {
       { immediate: true, deep: true }
     )
   },
-  beforeDestroy: function() {
+  beforeUnmount: function() {
     window.removeEventListener('focusin', this.onFocusIn)
     window.removeEventListener('focusout', this.onFocusOut)
     window.removeEventListener('click', this.hideMonthYearPicker)
@@ -464,7 +467,7 @@ export default {
         let calendar = this.listCalendars[i]
         let date = calendar.date
 
-        this.$set(this.listCalendars, i, {
+        this.listCalendars[i] = {
           key: calendar.key,
           date: date,
           dateTop: `${
@@ -476,7 +479,7 @@ export default {
             date.getMonth(),
             date.getFullYear()
           )
-        })
+        }
 
         if (!this.fConfigs.isMultiple) {
           break
@@ -490,7 +493,7 @@ export default {
         globalOptions = this.$getOptions()
         Object.keys(globalOptions).forEach(objectKey => {
           if (typeof this.fConfigs[objectKey] !== 'undefined') {
-            this.$set(this.fConfigs, objectKey, globalOptions[objectKey])
+            this.fConfigs[objectKey] = globalOptions[objectKey]
           }
         })
       }
@@ -499,7 +502,7 @@ export default {
         Object.keys(this.fConfigs).forEach(objectKey => {
           if (typeof this.configs[objectKey] !== 'undefined') {
             // Get From Configs
-            this.$set(this.fConfigs, objectKey, this.configs[objectKey])
+            this.fConfigs[objectKey] = this.configs[objectKey]
           }
         })
       } else {
@@ -508,7 +511,7 @@ export default {
             typeof this.fConfigs[objectKey] !== 'undefined' &&
             typeof this.$props[objectKey] !== 'undefined'
           ) {
-            this.$set(this.fConfigs, objectKey, this.$props[objectKey])
+            this.fConfigs[objectKey] = this.$props[objectKey]
           }
         })
       }
@@ -886,7 +889,7 @@ export default {
         }
       } else if (this.fConfigs.isMultipleDatePicker) {
         if (
-          this.calendar.hasOwnProperty('selectedDates') &&
+          Object.prototype.hasOwnProperty.call(this.calendar, 'selectedDates') &&
           this.calendar.selectedDates.find(date => date.date === item.date)
         ) {
           let dateIndex = this.calendar.selectedDates.findIndex(
@@ -897,7 +900,7 @@ export default {
           let date = Object.assign({}, this.defaultDateFormat)
           date.date = item.date
 
-          if (!this.calendar.hasOwnProperty('selectedDates')) {
+          if (!Object.prototype.hasOwnProperty.call(this.calendar, 'selectedDates')) {
             this.calendar.selectedDates = []
           }
 
@@ -938,7 +941,7 @@ export default {
               if (this.calendar.selectedDate === day.date) day.isMarked = true
             } else if (this.fConfigs.isMultipleDatePicker) {
               if (
-                this.calendar.hasOwnProperty('selectedDates') &&
+                Object.prototype.hasOwnProperty.call(this.calendar, 'selectedDates') &&
                 this.calendar.selectedDates.find(date => date.date === day.date)
               )
                 day.isMarked = true
@@ -1687,13 +1690,29 @@ export default {
       //   start: '',
       //   end: ''
       // })
+    },
+    clearRange(endDate) {
+      const removeIndex = this.calendar.multipleDateRange.findIndex(
+        range => range.end === endDate
+      )
+      this.calendar.multipleDateRange.splice(removeIndex, 1)
+    },
+    updateSingleSelectedDate(value) {
+      // Handle the update to singleSelectedDate
+      // This depends on your component's data structure
+      // You might need to emit this up further or update local data
+      this.singleSelectedDate = value
+    },
+    updateCalendarVal(updatedCalendar) {
+      // Handle the update to calendar object
+      this.calendar = updatedCalendar
     }
   }
 }
 </script>
 
 <style lang="scss">
-@import '../assets/scss/calendar.scss';
+@use '../assets/scss/calendar.scss';
 .rangeCleaner {
   padding: 5px 0 10px;
   display: flex;

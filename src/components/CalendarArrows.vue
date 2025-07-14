@@ -33,7 +33,7 @@
 
 <script>
 export default {
-  name: 'Arrows',
+  name: 'CalendarArrows',
   props: {
     fConfigs: {
       type: Object,

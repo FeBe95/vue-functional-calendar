@@ -26,7 +26,7 @@
 
 <script>
 export default {
-  name: 'Day',
+  name: 'CalendarDay',
   props: {
     day_key: {
       type: Number,
@@ -57,6 +57,7 @@ export default {
       default: false
     }
   },
+  emits: ['clearRangeByIndex'],
   data() {
     return {
       toolTip: false,
@@ -191,7 +192,7 @@ export default {
         return '·'
       }
 
-      return (endPosFirst > -1 ? Number(endPosFirst) : 0) || startPosFirst
+      return (endPosFirst > -1 ? Number(endPosFirst) : null) ?? startPosFirst
     }
   },
   methods: {
@@ -235,19 +236,14 @@ export default {
     },
 
     clearRange() {
-      //$emit
-      const removeIndex = this.calendar.multipleDateRange.findIndex(
-        range => range.end === this.day.date
-      )
-      this.calendar.multipleDateRange.splice(removeIndex, 1)
+      this.$emit('clearRange', this.day.date)
     },
     dayMouseOver() {
       this.$emit('dayMouseOver', this.day.date)
     },
     hasSlot(name = 'default') {
       return (
-        !!this.$parent.$parent.$slots[name] ||
-        !!this.$parent.$parent.$scopedSlots[name]
+        !!this.$parent.$parent.$slots[name]
       )
     },
     isDisabledDate(date) {
@@ -467,7 +463,7 @@ export default {
 
       if (
         day.date === this.calendar.selectedDate ||
-        (this.calendar.hasOwnProperty('selectedDates') &&
+        (Object.prototype.hasOwnProperty.call(this.calendar, 'selectedDates') &&
           this.calendar.selectedDates.find(sDate => sDate.date === day.date))
       ) {
         classes.push('vfc-borderd')
