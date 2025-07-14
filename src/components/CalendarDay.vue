@@ -466,7 +466,7 @@ export default {
 
       if (
         day.date === this.calendar.selectedDate ||
-        (this.calendar.hasOwnProperty('selectedDates') &&
+        (Object.prototype.hasOwnProperty.call(this.calendar, 'selectedDates') &&
           this.calendar.selectedDates.find(sDate => sDate.date === day.date))
       ) {
         classes.push('vfc-borderd')

@@ -344,13 +344,13 @@ export default {
       function(value) {
         if (
           typeof value === 'object' &&
-          (value.hasOwnProperty('dateRange') ||
-            value.hasOwnProperty('selectedDate'))
+          (Object.prototype.hasOwnProperty.call(value, 'dateRange') ||
+            Object.prototype.hasOwnProperty.call(value, 'selectedDate'))
         ) {
           this.calendar = value
         } else if (
           typeof value === 'object' &&
-          value.hasOwnProperty('multipleDateRange')
+          Object.prototype.hasOwnProperty.call(value, 'multipleDateRange')
         ) {
           this.calendar.multipleDateRange = value.multipleDateRange
           const lastElement = this.calendar.multipleDateRange[
@@ -888,7 +888,7 @@ export default {
         }
       } else if (this.fConfigs.isMultipleDatePicker) {
         if (
-          this.calendar.hasOwnProperty('selectedDates') &&
+          Object.prototype.hasOwnProperty.call(this.calendar, 'selectedDates') &&
           this.calendar.selectedDates.find(date => date.date === item.date)
         ) {
           let dateIndex = this.calendar.selectedDates.findIndex(
@@ -899,7 +899,7 @@ export default {
           let date = Object.assign({}, this.defaultDateFormat)
           date.date = item.date
 
-          if (!this.calendar.hasOwnProperty('selectedDates')) {
+          if (!Object.prototype.hasOwnProperty.call(this.calendar, 'selectedDates')) {
             this.calendar.selectedDates = []
           }
 
@@ -940,7 +940,7 @@ export default {
               if (this.calendar.selectedDate === day.date) day.isMarked = true
             } else if (this.fConfigs.isMultipleDatePicker) {
               if (
-                this.calendar.hasOwnProperty('selectedDates') &&
+                Object.prototype.hasOwnProperty.call(this.calendar, 'selectedDates') &&
                 this.calendar.selectedDates.find(date => date.date === day.date)
               )
                 day.isMarked = true
