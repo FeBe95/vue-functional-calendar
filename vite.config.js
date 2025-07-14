@@ -64,5 +64,10 @@ export default defineConfig(({ mode }) => {
         'vue': 'vue/dist/vue.esm-bundler.js'
       },
     },
+    build: {
+      rollupOptions: {
+        external: ['vue'],
+      },
+    },
   }
 })
