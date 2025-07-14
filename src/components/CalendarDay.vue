@@ -57,7 +57,7 @@ export default {
       default: false
     }
   },
-  emits: ['clearRangeByIndex'],
+  emits: ['clearRange', 'dayMouseOver'],
   data() {
     return {
       toolTip: false,
