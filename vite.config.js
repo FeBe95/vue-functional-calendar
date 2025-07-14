@@ -12,36 +12,18 @@ export default defineConfig(({ mode }) => {
       plugins: [vue()],
       build: {
         lib: {
-          entry: fileURLToPath(new URL('./src/components/FunctionalCalendar.vue', import.meta.url)),
+          entry: './index.js',
           name: 'FunctionalCalendar',
-          fileName: (format) => {
-            if (format === 'es') return 'FunctionalCalendar.common.js'
-            if (format === 'umd') return 'FunctionalCalendar.umd.js'
-            return `FunctionalCalendar.${format}.js`
-          },
-          formats: ['es', 'umd']
+          fileName: 'FunctionalCalendar',
         },
         rollupOptions: {
           external: ['vue'],
-          output: [
-            // ES/CommonJS format
-            {
-              format: 'es',
-              entryFileNames: 'FunctionalCalendar.common.js',
-              globals: {
-                vue: 'Vue'
-              }
-            },
-            // UMD format (unminified)
-            {
-              name: 'FunctionalCalendar',
-              format: 'umd',
-              entryFileNames: 'FunctionalCalendar.umd.js',
-              globals: {
-                vue: 'Vue'
-              }
+          output: {
+            exports: 'named',
+            globals: {
+              vue: 'Vue'
             }
-          ]
+          }
         },
         outDir: 'dist',
         copyPublicDir: false,
