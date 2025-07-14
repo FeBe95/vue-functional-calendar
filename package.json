@@ -4,7 +4,7 @@
     "email": "mail@felix-bernhard.com",
     "url": "https://github.com/FeBe95"
   },
-  "name": "vue-functional-calendar",
+  "name": "@febe95/vue-functional-calendar",
   "description": "Lightweight, high-performance calendar component based on Vue.js",
   "version": "4.0.0",
   "license": "MIT",

@@ -1,20 +1,11 @@
-<p align="center"><img src="https://raw.githubusercontent.com/ManukMinasyan/vue-functional-calendar/master/public/logo.png" width="200" /></p>
-<h1 align="center">Vue Functional Calendar</h1>
+<p align="center"><img src="https://raw.githubusercontent.com/FeBe95/vue-functional-calendar/master/public/logo.png" width="200" /></p>
+<h1 align="center">Vue Functional Calendar (Vue 3)</h1>
 <p align="center">Modern calendar and datepicker module for Vue.js</p>
 
 <p dir="auto" align="center">
-<a href="https://www.npmjs.com/package/vue-functional-calendar" rel="nofollow"><img src="https://img.shields.io/npm/v/vue-functional-calendar.svg" alt="Version" data-canonical-src="https://img.shields.io/npm/v/vue-functional-calendar.svg" style="max-width: 100%;"></a>
-<a href="/ManukMinasyan/vue-functional-calendar/blob/master/.github/LICENSE"><img src="https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat" alt="Software License" data-canonical-src="https://img.shields.io/badge/license-MIT-brightgreen.svg" style="max-width: 100%;"></a>
-<a href="https://www.npmjs.com/package/vue-functional-calendar" rel="nofollow"><img src="https://img.shields.io/npm/dw/vue-functional-calendar.svg" alt="Downloads" data-canonical-src="https://img.shields.io/npm/dw/vue-functional-calendar.svg" style="max-width: 100%;"></a>
-<a href="https://opencollective.com/vue-functional-calendar#category-CONTRIBUTE" rel="nofollow"><img src="https://img.shields.io/opencollective/all/vue-functional-calendar.svg?style=fiat" alt="Open Collective" data-canonical-src="https://img.shields.io/opencollective/all/vue-functional-calendar.svg?style=fiat" style="max-width: 100%;"></a>
-</p>
-
-
-<h2 align="center"> Sponsors</h2>
-<p align="center">
-<a href="https://getcopy.ai">
-<img src="https://www.getcopy.ai/logo-light.svg" width="240"/>
-</a>
+<a href="https://www.npmjs.com/package/vue-functional-calendar" rel="nofollow"><img src="https://img.shields.io/npm/v/@febe95/vue-functional-calendar.svg" alt="Version" data-canonical-src="https://img.shields.io/npm/v/@febe95/vue-functional-calendar.svg" style="max-width: 100%;"></a>
+<a href="/FeBe95/vue-functional-calendar/blob/master/.github/LICENSE"><img src="https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat" alt="Software License" data-canonical-src="https://img.shields.io/badge/license-MIT-brightgreen.svg" style="max-width: 100%;"></a>
+<a href="https://www.npmjs.com/package/vue-functional-calendar" rel="nofollow"><img src="https://img.shields.io/npm/dw/@febe95/vue-functional-calendar.svg" alt="Downloads" data-canonical-src="https://img.shields.io/npm/dw/@febe95/vue-functional-calendar.svg" style="max-width: 100%;"></a>
 </p>
 
 ___
@@ -24,7 +15,7 @@ Demo: <a href="https://y3jnxov469.codesandbox.io/" target="_blank">https://y3jnx
 
 [![Edit VueJS Functional Calendar Component](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/980jov4m4p?fontsize=14&hidenavigation=1)
 
-<img src="https://raw.githubusercontent.com/ManukMinasyan/vue-functional-calendar/master/public/demo.png"/>
+<img src="https://raw.githubusercontent.com/FeBe95/vue-functional-calendar/master/public/demo.png"/>
 
 ___
 
@@ -45,7 +36,7 @@ ___
 ## Install
 
 ```
-npm i vue-functional-calendar --save
+npm i @febe95/vue-functional-calendar --save
 ```
 ___
 
@@ -56,8 +47,8 @@ ___
 ```javascript
 // Introduced in vue file
 import FunctionalCalendar from 'vue-functional-calendar';
-Vue.use(FunctionalCalendar, {
-    dayNames: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su']
+app.use(FunctionalCalendar, {
+  dayNames: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su']
 });
 ````
 
