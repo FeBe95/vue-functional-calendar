@@ -49,6 +49,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:lib": "vite build --mode lib",
     "preview": "vite preview",
     "lint": "eslint . --fix",
     "format": "prettier --write src/"
