@@ -57,6 +57,7 @@ export default {
       default: false
     }
   },
+  emits: ['clearRangeByIndex'],
   data() {
     return {
       toolTip: false,
@@ -235,11 +236,7 @@ export default {
     },
 
     clearRange() {
-      //$emit
-      const removeIndex = this.calendar.multipleDateRange.findIndex(
-        range => range.end === this.day.date
-      )
-      this.calendar.multipleDateRange.splice(removeIndex, 1)
+      this.$emit('clearRange', this.day.date)
     },
     dayMouseOver() {
       this.$emit('dayMouseOver', this.day.date)

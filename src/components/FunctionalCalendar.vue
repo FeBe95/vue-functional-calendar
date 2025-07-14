@@ -162,6 +162,7 @@
                       :day="day"
                       :fConfigs="fConfigs"
                       :calendar="calendar"
+                      @clearRange="clearRange"
                       :helpCalendar="helpCalendar"
                       :week="week"
                       :day_key="day_key"
@@ -1689,6 +1690,12 @@ export default {
       //   start: '',
       //   end: ''
       // })
+    },
+    clearRange(endDate) {
+      const removeIndex = this.calendar.multipleDateRange.findIndex(
+        range => range.end === endDate
+      )
+      this.calendar.multipleDateRange.splice(removeIndex, 1)
     },
     updateSingleSelectedDate(value) {
       // Handle the update to singleSelectedDate
