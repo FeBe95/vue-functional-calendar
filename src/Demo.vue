@@ -196,7 +196,7 @@
         <functional-calendar
           class="calendar"
           :is-date-picker="true"
-          v-slot:default="props"
+          #default="props"
         >
           <div class="text-center">
             {{ props.day.day }}

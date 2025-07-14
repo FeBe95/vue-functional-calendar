@@ -7,7 +7,7 @@
       @update:singleSelectedDate="updateSingleSelectedDate"
       @update:calendar="updateCalendarVal"
     >
-      <template v-slot:dateRangeInputs="props">
+      <template #dateRangeInputs="props">
         <slot
           :startDate="props.startDate"
           :endDate="props.endDate"
@@ -16,7 +16,7 @@
         >
         </slot>
       </template>
-      <template v-slot:datePickerInput="props">
+      <template #datePickerInput="props">
         <slot
           :selectedDate="props.selectedDate"
           :isTypeable="fConfigs.isTypeable"
@@ -55,10 +55,10 @@
             :allowPreDate="allowPreDate"
             :allowNextDate="allowNextDate"
           >
-            <template v-slot:navigationArrowLeft>
+            <template #navigationArrowLeft>
               <slot name="navigationArrowLeft"></slot>
             </template>
-            <template v-slot:navigationArrowRight>
+            <template #navigationArrowRight>
               <slot name="navigationArrowRight"></slot>
             </template>
           </CalendarArrows>
@@ -87,10 +87,10 @@
                   :allowNextDate="allowNextDate"
                   :calendar-key="key"
                 >
-                  <template v-slot:navigationArrowLeft>
+                  <template #navigationArrowLeft>
                     <slot name="navigationArrowLeft"></slot>
                   </template>
-                  <template v-slot:navigationArrowRight>
+                  <template #navigationArrowRight>
                     <slot name="navigationArrowRight"></slot>
                   </template>
                 </CalendarArrows>
@@ -156,7 +156,6 @@
                     />
                     <CalendarDay
                       v-for="(day, day_key) in week.days"
-                      ref="day"
                       :key="key + week_key + day_key + 1"
                       :isMultipleDateRange="isMultipleDateRange"
                       :day="day"
@@ -169,8 +168,8 @@
                       @dayMouseOver="dayMouseOver"
                       :alwaysUseDefaultClasses="alwaysUseDefaultClasses"
                     >
-                      <template v-slot:default="props">
-                        <slot :week="props.week" :day="props.day"></slot>
+                      <template #default>
+                        <slot :week="week" :day="day"></slot>
                       </template>
                     </CalendarDay>
                   </div>
@@ -194,7 +193,7 @@
             </div>
           </div>
           <CalendarFooter v-if="canClearRange || $slots['footer']">
-            <template v-slot:footer>
+            <template #footer>
               <div @click="cleanRange">
                 <slot name="cleaner">
                   <div
