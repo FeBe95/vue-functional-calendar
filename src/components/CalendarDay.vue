@@ -26,7 +26,7 @@
 
 <script>
 export default {
-  name: 'Day',
+  name: 'CalendarDay',
   props: {
     day_key: {
       type: Number,
