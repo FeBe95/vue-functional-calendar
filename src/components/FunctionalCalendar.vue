@@ -340,7 +340,7 @@ export default {
 
     // Reacts to external selected dates
     this.$watch(
-      'value',
+      'modelValue',
       function(value) {
         if (
           typeof value === 'object' &&
