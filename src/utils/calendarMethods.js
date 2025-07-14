@@ -47,7 +47,7 @@ export default {
       let calendar = this.listCalendars[i]
       let date = calendar.date
 
-      this.$set(this.listCalendars, i, {
+      this.listCalendars[i] = {
         key: calendar.key,
         date: date,
         dateTop: `${
@@ -59,7 +59,7 @@ export default {
           date.getMonth(),
           date.getFullYear()
         )
-      })
+      }
 
       if (!this.fConfigs.isMultiple) {
         break
@@ -73,7 +73,7 @@ export default {
       globalOptions = this.$getOptions()
       Object.keys(globalOptions).forEach(objectKey => {
         if (typeof this.fConfigs[objectKey] !== 'undefined') {
-          this.$set(this.fConfigs, objectKey, globalOptions[objectKey])
+          this.fConfigs[objectKey] = globalOptions[objectKey]
         }
       })
     }
@@ -82,7 +82,7 @@ export default {
       Object.keys(this.fConfigs).forEach(objectKey => {
         if (typeof this.configs[objectKey] !== 'undefined') {
           // Get From Configs
-          this.$set(this.fConfigs, objectKey, this.configs[objectKey])
+          this.fConfigs[objectKey] = this.configs[objectKey]
         }
       })
     } else {
@@ -91,7 +91,7 @@ export default {
           typeof this.fConfigs[objectKey] !== 'undefined' &&
           typeof this.$props[objectKey] !== 'undefined'
         ) {
-          this.$set(this.fConfigs, objectKey, this.$props[objectKey])
+          this.fConfigs[objectKey] = this.$props[objectKey]
         }
       })
     }

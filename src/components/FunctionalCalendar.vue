@@ -4,6 +4,8 @@
       :fConfigs="fConfigs"
       :singleSelectedDate="singleSelectedDate"
       :calendar="calendar"
+      @update:singleSelectedDate="updateSingleSelectedDate"
+      @update:calendar="updateCalendarVal"
     >
       <template v-slot:dateRangeInputs="props">
         <slot
@@ -375,7 +377,7 @@ export default {
       { immediate: true, deep: true }
     )
   },
-  beforeDestroy: function() {
+  beforeUnmount: function() {
     window.removeEventListener('focusin', this.onFocusIn)
     window.removeEventListener('focusout', this.onFocusOut)
     window.removeEventListener('click', this.hideMonthYearPicker)
@@ -464,7 +466,7 @@ export default {
         let calendar = this.listCalendars[i]
         let date = calendar.date
 
-        this.$set(this.listCalendars, i, {
+        this.listCalendars[i] = {
           key: calendar.key,
           date: date,
           dateTop: `${
@@ -476,7 +478,7 @@ export default {
             date.getMonth(),
             date.getFullYear()
           )
-        })
+        }
 
         if (!this.fConfigs.isMultiple) {
           break
@@ -490,7 +492,7 @@ export default {
         globalOptions = this.$getOptions()
         Object.keys(globalOptions).forEach(objectKey => {
           if (typeof this.fConfigs[objectKey] !== 'undefined') {
-            this.$set(this.fConfigs, objectKey, globalOptions[objectKey])
+            this.fConfigs[objectKey] = globalOptions[objectKey]
           }
         })
       }
@@ -499,7 +501,7 @@ export default {
         Object.keys(this.fConfigs).forEach(objectKey => {
           if (typeof this.configs[objectKey] !== 'undefined') {
             // Get From Configs
-            this.$set(this.fConfigs, objectKey, this.configs[objectKey])
+            this.fConfigs[objectKey] = this.configs[objectKey]
           }
         })
       } else {
@@ -508,7 +510,7 @@ export default {
             typeof this.fConfigs[objectKey] !== 'undefined' &&
             typeof this.$props[objectKey] !== 'undefined'
           ) {
-            this.$set(this.fConfigs, objectKey, this.$props[objectKey])
+            this.fConfigs[objectKey] = this.$props[objectKey]
           }
         })
       }
@@ -1687,13 +1689,23 @@ export default {
       //   start: '',
       //   end: ''
       // })
+    },
+    updateSingleSelectedDate(value) {
+      // Handle the update to singleSelectedDate
+      // This depends on your component's data structure
+      // You might need to emit this up further or update local data
+      this.singleSelectedDate = value
+    },
+    updateCalendarVal(updatedCalendar) {
+      // Handle the update to calendar object
+      this.calendar = updatedCalendar
     }
   }
 }
 </script>
 
 <style lang="scss">
-@import '../assets/scss/calendar.scss';
+@use '../assets/scss/calendar.scss';
 .rangeCleaner {
   padding: 5px 0 10px;
   display: flex;

@@ -1,4 +1,4 @@
-@import './variables.scss';
+@use './variables.scss';
 
 .vfc {
   &-popover-container {
@@ -13,8 +13,8 @@
     transition: width 200ms;
     padding: 7px;
     width: 143px;
-    color: $silver_chalice;
-    border: 1px solid $gallery;
+    color: variables.$silver_chalice;
+    border: 1px solid variables.$gallery;
     text-align: center;
     outline: none;
   }
@@ -48,7 +48,7 @@
       border: none;
 
       &[type='text'] {
-        color: $trout;
+        color: variables.$trout;
       }
 
       &:focus {
@@ -68,14 +68,14 @@
       width: 295px;
       padding: 0.5em 0.25em;
       min-height: 15px;
-      background: $white;
-      border: 1px solid $alto;
+      background: variables.$white;
+      border: 1px solid variables.$alto;
       border-radius: 10px;
     }
 
     &-badge {
       width: 85px;
-      background-color: $porcelain;
+      background-color: variables.$porcelain;
       position: relative;
       display: inline-block;
       padding: 0.25em 0.4em;
@@ -105,7 +105,7 @@
         position: absolute;
         width: 75%;
         left: 0.15em;
-        background: $lightred;
+        background: variables.$lightred;
         height: 2px;
         margin-top: -1px;
         transform: rotate(45deg);
@@ -120,24 +120,24 @@
   &-dark {
     &.vfc-multiple-input {
       input {
-        border-color: $astronaut;
-        background-color: $mirage;
+        border-color: variables.$astronaut;
+        background-color: variables.$mirage;
       }
     }
 
     .vfc-single-input {
-      border-color: $astronaut;
-      background-color: $mirage;
+      border-color: variables.$astronaut;
+      background-color: variables.$mirage;
     }
 
     &.vfc-tags-input-root {
       .vfc-tags-input-wrapper-default {
-        background-color: $mirage;
-        border-color: $astronaut;
+        background-color: variables.$mirage;
+        border-color: variables.$astronaut;
 
         &.vfc-tags-input {
           .vfc-tags-input-badge {
-            background-color: $white;
+            background-color: variables.$white;
           }
         }
       }
@@ -149,7 +149,7 @@
     border-radius: 0.28571429rem;
     box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.25);
     font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', serif;
-    background-color: $white;
+    background-color: variables.$white;
     user-select: none;
     box-sizing: border-box;
 
@@ -164,19 +164,19 @@
     }
 
     &.vfc-dark {
-      background-color: $mirage;
+      background-color: variables.$mirage;
 
       .vfc-navigation-buttons,
       .vfc-separately-navigation-buttons {
         div {
           .vfc-arrow-right,
           .vfc-arrow-left {
-            border-color: $white;
+            border-color: variables.$white;
           }
 
           .vfc-arrow-left:active,
           .vfc-arrow-right:active {
-            border-color: $lightgrey;
+            border-color: variables.$lightgrey;
           }
         }
       }
@@ -185,40 +185,40 @@
         .vfc-calendar {
           .vfc-months-container {
             .vfc-content {
-              background-color: $white;
+              background-color: variables.$white;
 
               .vfc-navigation-buttons {
                 div {
                   .vfc-arrow-left,
                   .vfc-arrow-right {
-                    border-color: $black;
+                    border-color: variables.$black;
                   }
                 }
 
                 .vfc-top-date {
-                  color: $black;
+                  color: variables.$black;
 
                   .vfc-popover-caret {
-                    background-color: $white;
+                    background-color: variables.$white;
                   }
 
                   &.vfc-underline {
-                    text-decoration: underline dotted $royalblue;
+                    text-decoration: underline dotted variables.$royalblue;
                   }
                 }
               }
 
               .vfc-months {
                 div.vfc-item {
-                  color: $black;
+                  color: variables.$black;
 
                   &:hover {
                     background-color: rgba(113, 113, 113, 0.3);
                   }
 
                   &.vfc-selected {
-                    background-color: $pictionBlue;
-                    color: $white;
+                    background-color: variables.$pictionBlue;
+                    color: variables.$white;
                   }
                 }
               }
@@ -229,13 +229,13 @@
             &.vfc-content {
               .vfc-top-date {
                 span {
-                  color: $white;
+                  color: variables.$white;
 
                   &.vfc-underline {
-                    text-decoration: underline $pictionBlue;
+                    text-decoration: underline variables.$pictionBlue;
 
                     &.vfc-underline-active {
-                      text-decoration-color: $white;
+                      text-decoration-color: variables.$white;
                     }
                   }
                 }
@@ -243,52 +243,52 @@
 
               .vfc-dayNames {
                 span {
-                  color: $gainsboro;
+                  color: variables.$gainsboro;
                 }
               }
 
               .vfc-week {
                 .vfc-week-number {
-                  border-color: $keppel;
+                  border-color: variables.$keppel;
                 }
 
                 div {
                   &.vfc-day {
                     .vfc-base-start,
                     .vfc-base-end {
-                      background-color: $astronaut;
+                      background-color: variables.$astronaut;
                     }
 
                     span.vfc-span-day {
-                      color: $white;
+                      color: variables.$white;
 
                       &.vfc-today {
-                        background-color: $keppel;
-                        color: $white;
+                        background-color: variables.$keppel;
+                        color: variables.$white;
                       }
 
                       &.vfc-marked {
-                        background-color: $pictionBlue;
+                        background-color: variables.$pictionBlue;
 
                         &.vfc-borderd,
                         &.vfc-start-marked,
                         &.vfc-end-marked {
-                          color: $white;
+                          color: variables.$white;
                         }
                         &:not(.vfc-start-marked):not(.vfc-end-marked):before {
-                          background-color: $astronaut;
+                          background-color: variables.$astronaut;
                         }
                         &:after {
-                          color: $black;
+                          color: variables.$black;
                         }
 
                         &.vfc-hide {
-                          color: $gainsboro;
+                          color: variables.$gainsboro;
                         }
                       }
 
                       &.vfc-hide {
-                        color: $tundora;
+                        color: variables.$tundora;
                       }
 
                       &.vfc-disabled {
@@ -296,13 +296,13 @@
                       }
 
                       &:after {
-                        color: $black;
+                        color: variables.$black;
                       }
 
                       &.vfc-hover:hover,
                       &.vfc-hovered {
                         z-index: 1;
-                        background-color: $steelblue;
+                        background-color: variables.$steelblue;
                       }
                     }
                   }
@@ -316,31 +316,31 @@
       .vfc-time-picker-container {
         .vfc-time-picker__list {
           .vfc-time-picker__item {
-            color: $white;
+            color: variables.$white;
           }
 
           .vfc-time-picker__item--selected {
-            color: $pictionBlue;
+            color: variables.$pictionBlue;
           }
 
           &::-webkit-scrollbar-track {
-            background: $astronaut;
+            background: variables.$astronaut;
           }
 
           &::-webkit-scrollbar-thumb {
-            background: $pictionBlue;
+            background: variables.$pictionBlue;
           }
         }
 
         .vfc-close:before,
         .vfc-close:after {
-          background-color: $white;
+          background-color: variables.$white;
         }
 
         .vfc-modal-time-mechanic {
           .vfc-modal-time-line {
-            background-color: $pictionBlue;
-            color: $white;
+            background-color: variables.$pictionBlue;
+            color: variables.$white;
           }
         }
       }
@@ -371,11 +371,11 @@
       }
 
       &::-webkit-scrollbar-track {
-        background: $gallery;
+        background: variables.$gallery;
       }
 
       &::-webkit-scrollbar-thumb {
-        background: $silver;
+        background: variables.$silver;
       }
 
       .vfc-time-picker__with-suffix & {
@@ -395,7 +395,7 @@
       }
 
       &--selected {
-        color: $royalblue;
+        color: variables.$royalblue;
         font-size: 32px;
       }
 
@@ -427,7 +427,7 @@
       content: ' ';
       height: 26px;
       width: 2px;
-      background-color: $white;
+      background-color: variables.$white;
       transform: rotate(45deg);
     }
 
@@ -446,9 +446,9 @@
 
       &-line {
         width: 100%;
-        background-color: $royalblue;
+        background-color: variables.$royalblue;
         text-align: left;
-        color: $white;
+        color: variables.$white;
         font-size: 16px;
         padding-top: 15px;
         padding-bottom: 15px;
@@ -465,7 +465,7 @@
     }
 
     &-append {
-      color: $boulder;
+      color: variables.$boulder;
       font-weight: normal;
       display: flex;
       justify-content: space-between;
@@ -550,7 +550,7 @@
     div {
       z-index: 200;
       display: flex;
-      color: $black;
+      color: variables.$black;
       font-size: 18px;
       margin: 20px 10px;
 
@@ -563,7 +563,7 @@
         height: 12px;
         border-top: 2px solid;
         border-left: 2px solid;
-        border-color: $ebony;
+        border-color: variables.$ebony;
         transform: rotate(-45deg);
       }
 
@@ -584,7 +584,7 @@
         height: 12px;
         border-top: 2px solid;
         border-right: 2px solid;
-        border-color: $ebony;
+        border-color: variables.$ebony;
         transform: rotate(45deg);
       }
     }
@@ -643,7 +643,7 @@
       transition-duration: 0s;
     }
 
-    &-slide-left-enter,
+    &-slide-left-enter-from,
     &-slide-right-leave-to {
       opacity: 0;
       -webkit-transform: translateX(25px);
@@ -651,20 +651,20 @@
     }
 
     &-slide-left-leave-to,
-    &-slide-right-enter {
+    &-slide-right-enter-from {
       opacity: 0;
       -webkit-transform: translateX(-25px);
       transform: translateX(-25px);
     }
 
     &-slide-down-leave-to,
-    &-slide-up-enter {
+    &-slide-up-enter-from {
       opacity: 0;
       -webkit-transform: translateY(20px);
       transform: translateY(20px);
     }
 
-    &-slide-down-enter,
+    &-slide-down-enter-from,
     &-slide-up-leave-to {
       opacity: 0;
       -webkit-transform: translateY(-20px);
@@ -697,8 +697,8 @@
       }
 
       &.vfc-selected {
-        background-color: $pictionBlue;
-        color: $white;
+        background-color: variables.$pictionBlue;
+        color: variables.$white;
         text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
       }
     }
@@ -761,11 +761,11 @@
         min-width: 133px;
         position: absolute;
         z-index: 1000;
-        background-color: $licorice;
+        background-color: variables.$licorice;
         border: 1px solid;
         border-radius: 5px;
         top: 55px;
-        color: $white;
+        color: variables.$white;
         padding: 5px 0;
 
         .vfc-navigation-buttons {
@@ -779,12 +779,12 @@
               cursor: pointer;
               .vfc-arrow-left,
               .vfc-arrow-right {
-                border-color: $pictionBlue;
+                border-color: variables.$pictionBlue;
               }
             }
             .vfc-arrow-left,
             .vfc-arrow-right {
-              border-color: $white;
+              border-color: variables.$white;
               width: 8px;
               height: 8px;
             }
@@ -810,7 +810,7 @@
               border-left: inherit;
               background: inherit;
               z-index: -1;
-              background-color: $licorice;
+              background-color: variables.$licorice;
               transform: translateY(-40%) rotate(45deg);
               top: 0;
               left: 50%;
@@ -818,7 +818,7 @@
 
             &.vfc-underline {
               cursor: pointer;
-              text-decoration: underline dotted $royalblue;
+              text-decoration: underline dotted variables.$royalblue;
             }
           }
         }
@@ -848,8 +848,8 @@
             }
 
             &.vfc-selected {
-              background-color: $pictionBlue;
-              color: $white;
+              background-color: variables.$pictionBlue;
+              color: variables.$white;
               text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
             }
           }
@@ -884,7 +884,7 @@
       cursor: default;
       text-decoration: unset;
       margin: 0 2px;
-      color: $black;
+      color: variables.$black;
 
       &.vfc-cursor-pointer {
         cursor: pointer;
@@ -892,10 +892,10 @@
 
       &.vfc-underline {
         cursor: pointer;
-        text-decoration: underline $royalblue;
+        text-decoration: underline variables.$royalblue;
 
         &.vfc-underline-active {
-          text-decoration-color: $black;
+          text-decoration-color: variables.$black;
         }
       }
     }
@@ -913,7 +913,7 @@
     span {
       width: 100%;
       margin-right: 5px;
-      color: $mineShaft;
+      color: variables.$mineShaft;
       text-align: center;
 
       &:last-child {
@@ -924,7 +924,7 @@
 
   &-week {
     &-number {
-      border-right: 1px solid $lightred;
+      border-right: 1px solid variables.$lightred;
     }
 
     .vfc-day {
@@ -937,7 +937,7 @@
       .vfc-base-start,
       .vfc-base-end {
         position: absolute;
-        background: $lightskyblue;
+        background: variables.$lightskyblue;
         width: 50% !important;
         border-radius: 0 !important;
         border-right-width: 0 !important;
@@ -962,8 +962,8 @@
         vertical-align: middle;
 
         &.vfc-today {
-          background-color: $lightred;
-          color: $white;
+          background-color: variables.$lightred;
+          color: variables.$white;
         }
 
         &.vfc-cursor-not-allowed {
@@ -972,7 +972,7 @@
 
         &.vfc-marked {
           margin: auto;
-          background-color: $royalblue;
+          background-color: variables.$royalblue;
           border-radius: 50%;
           opacity: 1;
           z-index: 1;
@@ -980,7 +980,7 @@
           &.vfc-borderd,
           &.vfc-start-marked,
           &.vfc-end-marked {
-            color: $white;
+            color: variables.$white;
 
             &:before {
               background: transparent;
@@ -992,23 +992,23 @@
             left: 0;
             content: '';
             position: absolute;
-            background-color: $lightskyblue;
+            background-color: variables.$lightskyblue;
             width: 100%;
             height: 100%;
             z-index: -1;
           }
 
           &:after {
-            color: $black;
+            color: variables.$black;
           }
 
           &.vfc-hide {
-            color: $lightgrey;
+            color: variables.$lightgrey;
           }
         }
 
         &.vfc-hide {
-          color: $gainsboro;
+          color: variables.$gainsboro;
         }
 
         &.vfc-disabled {
@@ -1027,7 +1027,7 @@
           bottom: 0;
           right: 0;
           content: attr(data-date);
-          color: $black;
+          color: variables.$black;
           display: flex;
           justify-content: center;
           align-items: center;
@@ -1035,14 +1035,14 @@
 
         &.vfc-hover:hover,
         &.vfc-hovered {
-          background-color: $lightgreyHover;
+          background-color: variables.$lightgreyHover;
           z-index: 100;
         }
       }
 
       /* Weekends */
       &:last-child {
-        color: $black;
+        color: variables.$black;
       }
     }
   }

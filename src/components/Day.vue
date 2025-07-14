@@ -246,8 +246,7 @@ export default {
     },
     hasSlot(name = 'default') {
       return (
-        !!this.$parent.$parent.$slots[name] ||
-        !!this.$parent.$parent.$scopedSlots[name]
+        !!this.$parent.$parent.$slots[name]
       )
     },
     isDisabledDate(date) {

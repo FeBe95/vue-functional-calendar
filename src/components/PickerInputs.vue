@@ -14,7 +14,8 @@
         <input
           type="text"
           title="Start Date"
-          v-model="dateRangeSelectedStartDate"
+          :value="dateRangeSelectedStartDate"
+          @input="updateDateRangeStart"
           :placeholder="fConfigs.placeholder.split(' ')[0]"
           :readonly="!fConfigs.isTypeable"
           :maxlength="fConfigs.dateFormat.length"
@@ -22,7 +23,8 @@
         <input
           type="text"
           title="End Date"
-          v-model="dateRangeSelectedEndDate"
+          :value="dateRangeSelectedEndDate"
+          @input="updateDateRangeEnd"
           :placeholder="fConfigs.placeholder.split(' ')[0]"
           :readonly="!fConfigs.isTypeable"
           :maxlength="fConfigs.dateFormat.length"
@@ -42,7 +44,8 @@
           class="vfc-single-input"
           type="text"
           title="Date"
-          v-model="singleSelectedDate"
+          :value="singleSelectedDate"
+          @input="updateSingleDate"
           :placeholder="fConfigs.placeholder"
           :readonly="!fConfigs.isTypeable"
           :maxlength="fConfigs.dateFormat.length"
@@ -69,7 +72,8 @@
         </span>
 
         <input
-          v-model="calendar.selectedDatesItem"
+          :value="calendar.selectedDatesItem"
+          @input="updateSelectedDatesItem"
           @keydown.enter.prevent="$parent.addToSelectedDates"
           type="text"
           placeholder="Add a date"
@@ -96,6 +100,7 @@ export default {
       required: true
     }
   },
+  emits: ['update:singleSelectedDate', 'update:calendar'],
   computed: {
     dateRangeSelectedStartDate: {
       get() {
@@ -106,7 +111,14 @@ export default {
       set(newValue) {
         newValue = this.helpCalendar.mask(newValue)
         if (this.helpCalendar.getDateFromFormat(newValue).getMonth()) {
-          this.calendar.dateRange.start = newValue
+          const updatedCalendar = {
+            ...this.calendar,
+            dateRange: {
+              ...this.calendar.dateRange,
+              start: newValue
+            }
+          }
+          this.$emit('update:calendar', updatedCalendar)
         }
       }
     },
@@ -117,9 +129,38 @@ export default {
       set(newValue) {
         newValue = this.helpCalendar.mask(newValue)
         if (this.helpCalendar.getDateFromFormat(newValue).getMonth()) {
-          this.calendar.dateRange.end = newValue
+          const updatedCalendar = {
+            ...this.calendar,
+            dateRange: {
+              ...this.calendar.dateRange,
+              end: newValue
+            }
+          }
+          this.$emit('update:calendar', updatedCalendar)
         }
       }
+    }
+  },
+  methods: {
+    updateSingleDate(event) {
+      this.$emit('update:singleSelectedDate', event.target.value)
+    },
+    updateDateRangeStart(event) {
+      this.dateRangeSelectedStartDate = event.target.value
+    },
+    updateDateRangeEnd(event) {
+      this.dateRangeSelectedEndDate = event.target.value
+    },
+    updateSelectedDatesItem(event) {
+      const updatedCalendar = {
+        ...this.calendar,
+        selectedDatesItem: event.target.value
+      }
+      this.$emit('update:calendar', updatedCalendar)
+    },
+    removeFromSelectedDates(index) {
+      // This method needs to be implemented or moved to parent
+      this.$parent.removeFromSelectedDates(index)
     }
   }
 }
