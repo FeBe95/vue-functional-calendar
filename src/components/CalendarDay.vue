@@ -192,7 +192,7 @@ export default {
         return '·'
       }
 
-      return (endPosFirst > -1 ? Number(endPosFirst) : 0) || startPosFirst
+      return (endPosFirst > -1 ? Number(endPosFirst) : null) ?? startPosFirst
     }
   },
   methods: {
