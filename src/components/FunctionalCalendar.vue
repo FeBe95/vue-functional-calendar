@@ -1474,10 +1474,25 @@ export default {
     openTimePicker() {
       this.showTimePicker = true
     },
+    adjustTransitionPrefix(oldVal, newVal) {
+      if (oldVal > newVal) {
+        this.transitionPrefix = 'left'
+      }
+      else if (oldVal < newVal) {
+        this.transitionPrefix = 'right'
+      }
+      else {
+        this.transitionPrefix = ''
+      }
+    },
     pickMonth(key, calendarKey) {
       this.showMonthPicker = false
       if (!this.isSeparately) {
         this.listCalendars.forEach((currentCalendar, index) => {
+          if (index === 0) {
+            this.adjustTransitionPrefix(key, currentCalendar.date.getMonth())
+          }
+
           let date = currentCalendar.date
           currentCalendar.date = new Date(
             date.getFullYear(),
@@ -1488,6 +1503,7 @@ export default {
         })
       } else {
         let currentCalendar = this.listCalendars[calendarKey]
+        this.adjustTransitionPrefix(key, currentCalendar.date.getMonth())
         let date = currentCalendar.date
         currentCalendar.date = new Date(date.getFullYear(), key + 1, 0)
         currentCalendar.key += hUniqueID()
@@ -1500,7 +1516,11 @@ export default {
     pickYear(year, calendarKey) {
       this.showYearPicker = false
       if (!this.isSeparately) {
-        this.listCalendars.forEach(currentCalendar => {
+        this.listCalendars.forEach((currentCalendar, index) => {
+          if (index === 0) {
+            this.adjustTransitionPrefix(year, currentCalendar.date.getFullYear())
+          }
+
           let date = currentCalendar.date
           currentCalendar.date = new Date(year, date.getMonth() + 1, 0)
           currentCalendar.key += hUniqueID()
@@ -1508,6 +1528,7 @@ export default {
         })
       } else {
         let currentCalendar = this.listCalendars[calendarKey]
+        this.adjustTransitionPrefix(year, currentCalendar.date.getFullYear())
         let date = currentCalendar.date
         currentCalendar.date = new Date(year, date.getMonth() + 1, 0)
         currentCalendar.key += hUniqueID()
