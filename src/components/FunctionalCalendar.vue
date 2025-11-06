@@ -1401,6 +1401,8 @@ export default {
     PreYear(calendarKey = null) {
       if (!this.allowPreDate) return false
 
+      this.transitionPrefix = 'right'
+
       let step = this.showYearPicker ? this.fConfigs.changeYearStep : 1
 
       calendarKey = calendarKey !== null ? calendarKey : 0
@@ -1424,6 +1426,8 @@ export default {
      */
     NextYear(calendarKey = null) {
       if (!this.allowNextDate) return false
+
+      this.transitionPrefix = 'left'
 
       let step = this.showYearPicker ? this.fConfigs.changeYearStep : 1
 
