@@ -378,9 +378,11 @@ export default {
     )
   },
   beforeUnmount: function() {
-    window.removeEventListener('focusin', this.onFocusIn)
-    window.removeEventListener('focusout', this.onFocusOut)
-    window.removeEventListener('click', this.hideMonthYearPicker)
+    this.popoverElement.removeEventListener('focusin', this.onFocusIn)
+    this.popoverElement.removeEventListener('focusout', this.onFocusOut)
+    window.removeEventListener('click', this.hideMonthYearPicker, {
+      capture: true
+    })
   },
   watch: {
     enabledDates: {
