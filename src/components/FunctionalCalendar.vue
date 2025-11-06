@@ -230,7 +230,6 @@ import PickerInputs from '../components/PickerInputs.vue'
 import CalendarFooter from './CalendarFooter.vue'
 
 import { hElContains, hUniqueID } from '../utils/helpers'
-// import calendarMethods from '../utils/calendarMethods'
 
 export default {
   name: 'FunctionalCalendar',
