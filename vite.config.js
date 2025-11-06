@@ -34,6 +34,22 @@ export default defineConfig(({ mode }) => {
     }
   }
 
+  if (mode === 'demo') {
+    return {
+      base: '/vue-functional-calendar/',
+      plugins: [
+        vue(),
+        vueDevTools(),
+      ],
+      resolve: {
+        alias: {
+          '@': fileURLToPath(new URL('./src', import.meta.url)),
+          'vue': 'vue/dist/vue.esm-bundler.js'
+        },
+      },
+    }
+  }
+
   // Default development configuration
   return {
     plugins: [
